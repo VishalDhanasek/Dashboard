@@ -155,39 +155,162 @@ const StudentProgressOverview: React.FC = () => {
       ) : (
         <>
           <Box display="flex" justifyContent="flex-end" mb={2}>
-            <FormControl size="small" sx={{ width: 220 }}>
-              <InputLabel>Select Student</InputLabel>
-              <Select
-                value={selectedStudent}
-                label="Select Student"
-                onChange={handleChange}
-              >
-                {students.map((s) => (
-                  <MenuItem key={s.Student_ID} value={s.Student_Name}>
-                    {s.Student_Name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+          <FormControl 
+            size="small" 
+            sx={{ 
+              width: 220,
+              '& .MuiOutlinedInput-root': {
+                background: 'rgba(255, 255, 255, 0.5)',
+                backdropFilter: 'blur(8px)',
+                borderRadius: '10px',
+                transition: 'all 0.2s ease',
+                '& fieldset': {
+                  borderColor: 'rgba(102, 126, 234, 0.25)',
+                  borderWidth: '1px',
+                },
+                '&:hover': {
+                  background: 'rgba(255, 255, 255, 0.7)',
+                  '& fieldset': {
+                    borderColor: 'rgba(102, 126, 234, 0.4)',
+                  },
+                },
+                '&.Mui-focused': {
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  '& fieldset': {
+                    borderColor: '#667eea',
+                    borderWidth: '2px',
+                  },
+                },
+              },
+              '& .MuiInputLabel-root': {
+                color: 'rgba(100, 116, 139, 0.7)',
+                '&.Mui-focused': {
+                  color: '#667eea',
+                },
+              },
+            }}
+          >
+            <InputLabel>Select Student</InputLabel>
+            <Select
+              value={selectedStudent}
+              label="Select Student"
+              onChange={handleChange}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    background: 'rgba(255, 255, 255, 0.95)',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(230, 240, 255, 0.5)',
+                    boxShadow: '0 8px 32px 0 rgba(100, 149, 237, 0.15)',
+                    borderRadius: '10px',
+                    mt: 1,
+                    '& .MuiMenuItem-root': {
+                      '&:hover': {
+                        background: 'rgba(102, 126, 234, 0.08)',
+                      },
+                      '&.Mui-selected': {
+                        background: 'rgba(102, 126, 234, 0.12)',
+                        '&:hover': {
+                          background: 'rgba(102, 126, 234, 0.16)',
+                        },
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              {students.map((s) => (
+                <MenuItem key={s.Student_ID} value={s.Student_Name}>
+                  {s.Student_Name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
           </Box>
 
           <ResponsiveContainer width="100%" height={370}>
-            <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="Level" />
-              <YAxis domain={[0, 100]} />
-              <Tooltip />
+          <LineChart data={chartData}>
+          <defs>
+            <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#667eea" stopOpacity={0.9}/>
+              <stop offset="95%" stopColor="#764ba2" stopOpacity={0.9}/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <CartesianGrid 
+            strokeDasharray="3 3" 
+            stroke="rgba(102, 126, 234, 0.08)" 
+            strokeWidth={1}
+          />
+          <XAxis 
+            dataKey="Level" 
+            stroke="rgba(100, 116, 139, 0.5)"
+            style={{ 
+              fontSize: '12px',
+              fontWeight: 500,
+              fill: 'rgba(100, 116, 139, 0.7)'
+            }}
+            tickLine={{ stroke: 'rgba(102, 126, 234, 0.2)' }}
+          />
+          <YAxis 
+            domain={[0, 100]} 
+            stroke="rgba(100, 116, 139, 0.5)"
+            style={{ 
+              fontSize: '12px',
+              fontWeight: 500,
+              fill: 'rgba(100, 116, 139, 0.7)'
+            }}
+            tickLine={{ stroke: 'rgba(102, 126, 234, 0.2)' }}
+          />
+          <Tooltip 
+            contentStyle={{
+              background: 'rgba(255, 255, 255, 0.95)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(230, 240, 255, 0.6)',
+              borderRadius: '10px',
+              boxShadow: '0 4px 20px rgba(102, 126, 234, 0.12)',
+              padding: '12px 16px',
+            }}
+            labelStyle={{
+              color: '#667eea',
+              fontWeight: 600,
+              marginBottom: '4px',
+            }}
+            itemStyle={{
+              color: 'rgba(100, 116, 139, 0.9)',
+              fontWeight: 500,
+            }}
+          />
+          <Line
+            type="monotone"
+            dataKey="Score"
+            name={`${selectedStudent || "Student"}'s Score`}
+            stroke="url(#colorScore)"
+            strokeWidth={3}
+            dot={{ 
+              r: 5, 
+              fill: '#667eea',
+              strokeWidth: 2,
+              stroke: '#fff',
+              filter: 'url(#glow)'
+            }}
+            activeDot={{ 
+              r: 8,
+              fill: '#764ba2',
+              strokeWidth: 3,
+              stroke: '#fff',
+              filter: 'url(#glow)'
+            }}
+          />
+        </LineChart>
 
-              <Line
-                type="monotone"
-                dataKey="Score"
-                name={`${selectedStudent || "Student"}'s Score`}
-                stroke="#3f51b5"
-                strokeWidth={3}
-                dot={{ r: 5 }}
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
           </ResponsiveContainer>
         </>
       )}
