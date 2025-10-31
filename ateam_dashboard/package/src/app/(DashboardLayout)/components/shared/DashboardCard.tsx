@@ -38,7 +38,7 @@ const DashboardCard = ({
           inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
           0 0 0 1px rgba(230, 240, 255, 0.3)
         `,
-        borderRadius: '20px',
+        borderRadius: '10px',
         position: 'relative',
         overflow: 'hidden',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',

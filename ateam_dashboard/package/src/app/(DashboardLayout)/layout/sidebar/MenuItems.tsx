@@ -22,16 +22,18 @@ const Menuitems = [
     icon: IconLayoutDashboard,
     href: "/",
   },
-  // {
-  //   navlabel: true,
-  //   subheader: "UTILITIES",
-  // },
-  // {
-  //   id: uniqueId(),
-  //   title: "Typography",
-  //   icon: IconTypography,
-  //   href: "/utilities/typography",
-  // },
+  {
+    navlabel: true,
+    subheader: "ABACUS",
+  },
+  {
+    id: uniqueId(),
+    title: "Dashboard",
+    icon: IconLayoutDashboard,
+    // href: "/utilities/typography",
+    href: "/dashboard",
+  },
+
   // {
   //   id: uniqueId(),
   //   title: "Shadow",
@@ -70,9 +72,6 @@ const Menuitems = [
   //   icon: IconAperture,
   //   href: "/sample-page",
   // },
-
 ];
 
 export default Menuitems;
-
-

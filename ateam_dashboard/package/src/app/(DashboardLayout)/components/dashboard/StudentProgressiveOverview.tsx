@@ -125,10 +125,23 @@ const StudentProgressOverview: React.FC = () => {
       { key: "Final_Assessment_Score", label: "Final" },
     ];
 
-    return levels.map(({ key, label }) => ({
-      Level: label,
-      Score: Number((student as any)[key] || 0),
-    }));
+    const data: ChartPoint[] = [];
+    
+    for (const { key, label } of levels) {
+      const score = (student as any)[key];
+      // Only add data point if score exists and is not 0
+      if (score !== undefined && score !== null && score !== 0 && score !== "") {
+        data.push({
+          Level: label,
+          Score: Number(score),
+        });
+      } else {
+        // Stop adding data points once we hit a missing value
+        break;
+      }
+    }
+    
+    return data;
   };
 
   const handleChange = (event: SelectChangeEvent<string>) => {
