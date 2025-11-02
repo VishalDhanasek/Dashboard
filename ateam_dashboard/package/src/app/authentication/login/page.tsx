@@ -1,8 +1,7 @@
 "use client";
 import Link from "next/link";
-import { Grid, Box, Card, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
-// components
 import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer";
 import Logo from "@/app/(DashboardLayout)/layout/shared/logo/Logo";
 import AuthLogin from "../auth/AuthLogin";
@@ -10,24 +9,24 @@ import AuthLogin from "../auth/AuthLogin";
 const slides = [
   {
     image: "/statistics.png",
-    quote: "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-    author: "Winston Churchill"
+    quote: "Introducing AIKO - Your Child's Learning Partner",
+    author: "Winston Churchill",
   },
   {
     image: "/ailearning.png",
-    quote: "The only way to do great work is to love what you do.",
-    author: "Steve Jobs"
+    quote: "At A Team Academy, we believe every child is born curious and capable of greatness.",
+    author: "Steve Jobs",
   },
   {
     image: "/abacus.png",
-    quote: "Innovation distinguishes between a leader and a follower.",
-    author: "Steve Jobs"
+    quote: "Shaping Young Minds with the Power of AI",
+    author: "Steve Jobs",
   },
   {
     image: "/skill.png",
-    quote: "Great things never come from comfort zones.",
-    author: "Anonymous"
-  }
+    quote: "At A Team Academy, we combine the best of traditional learning like Abacus, Phonics, and Vedic Math with the power of AI",
+    author: "Anonymous",
+  },
 ];
 
 const Login2 = () => {
@@ -37,12 +36,11 @@ const Login2 = () => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
-
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <PageContainer title="Login" description="this is Login page">
+    <PageContainer title="Login" description="Login page with animated quote slider">
       <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
         {/* Left Side - Login Form */}
         <Box
@@ -64,28 +62,15 @@ const Login2 = () => {
             <Typography variant="h3" fontWeight="700" mb={1}>
               Welcome Back
             </Typography>
-            <Typography
-              variant="subtitle1"
-              color="textSecondary"
-              mb={4}
-              fontWeight="400"
-            >
+            <Typography variant="subtitle1" color="textSecondary" mb={4}>
               Enter your credentials to access your account
             </Typography>
+
             <AuthLogin
               subtext={<></>}
               subtitle={
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  justifyContent="center"
-                  mt={3}
-                >
-                  <Typography
-                    color="textSecondary"
-                    variant="body1"
-                    fontWeight="400"
-                  >
+                <Stack direction="row" spacing={1} justifyContent="center" mt={3}>
+                  <Typography color="textSecondary" variant="body1">
                     New to The A Team?
                   </Typography>
                   <Typography
@@ -95,9 +80,7 @@ const Login2 = () => {
                     sx={{
                       textDecoration: "none",
                       color: "primary.main",
-                      "&:hover": {
-                        textDecoration: "underline",
-                      },
+                      "&:hover": { textDecoration: "underline" },
                     }}
                   >
                     Create an account
@@ -108,7 +91,7 @@ const Login2 = () => {
           </Box>
         </Box>
 
-        {/* Right Side - Image Slider with Blue Overlay */}
+        {/* Right Side - Image Slider */}
         <Box
           sx={{
             flex: 1,
@@ -117,7 +100,7 @@ const Login2 = () => {
             overflow: "hidden",
           }}
         >
-          {/* Sliding Images */}
+          {/* Background Images */}
           {slides.map((slide, index) => (
             <Box
               key={index}
@@ -144,7 +127,8 @@ const Login2 = () => {
               left: 0,
               width: "100%",
               height: "100%",
-              background: "linear-gradient(135deg, rgba(25, 118, 210, 0.85) 0%, rgba(13, 71, 161, 0.85) 100%)",
+              background:
+                "linear-gradient(135deg, rgba(25,118,210,0.85) 0%, rgba(13,71,161,0.85) 100%)",
               zIndex: 1,
             }}
           />
@@ -159,63 +143,56 @@ const Login2 = () => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              padding: 6,
+              px: 6,
               color: "white",
+              textAlign: "center",
             }}
           >
-            <Box sx={{ maxWidth: "600px", textAlign: "center" }}>
-              <Typography
-                variant="h3"
-                fontWeight="300"
-                mb={3}
-                sx={{
-                  opacity: currentSlide === currentSlide ? 1 : 0,
-                  transition: "opacity 1s ease-in-out 0.3s",
-                  lineHeight: 1.6,
-                  fontStyle: "italic",
-                }}
-              >
-                "{slides[currentSlide].quote}"
-              </Typography>
-              <Typography
-                variant="h6"
-                fontWeight="500"
-                sx={{
-                  opacity: currentSlide === currentSlide ? 1 : 0,
-                  transition: "opacity 1s ease-in-out 0.5s",
-                }}
-              >
-                — {slides[currentSlide].author}
-              </Typography>
+            <Typography
+              variant="h4"
+              fontWeight="300"
+              sx={{
+                opacity: 1,
+                transition: "opacity 1s ease-in-out",
+                lineHeight: 1.6,
+                fontStyle: "italic",
+                maxWidth: 600,
+                mb: 3,
+              }}
+            >
+                &quot;{slides[currentSlide].quote}&quot;
+            </Typography>
+            {/* <Typography
+              variant="h6"
+              fontWeight="500"
+              sx={{
+                transition: "opacity 1s ease-in-out 0.3s",
+              }}
+            >
+              — {slides[currentSlide].author}
+            </Typography> */}
 
-              {/* Slide Indicators */}
-              <Stack
-                direction="row"
-                spacing={1}
-                justifyContent="center"
-                mt={6}
-              >
-                {slides.map((_, index) => (
-                  <Box
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    sx={{
-                      width: currentSlide === index ? 40 : 12,
-                      height: 12,
-                      borderRadius: 6,
-                      backgroundColor: currentSlide === index
+            {/* Slide Indicators */}
+            <Stack direction="row" spacing={1} justifyContent="center" mt={6}>
+              {slides.map((_, index) => (
+                <Box
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  sx={{
+                    width: currentSlide === index ? 40 : 12,
+                    height: 12,
+                    borderRadius: 6,
+                    backgroundColor:
+                      currentSlide === index
                         ? "white"
-                        : "rgba(255, 255, 255, 0.5)",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      "&:hover": {
-                        backgroundColor: "white",
-                      },
-                    }}
-                  />
-                ))}
-              </Stack>
-            </Box>
+                        : "rgba(255,255,255,0.5)",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    "&:hover": { backgroundColor: "white" },
+                  }}
+                />
+              ))}
+            </Stack>
           </Box>
         </Box>
       </Box>

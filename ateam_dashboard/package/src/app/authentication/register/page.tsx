@@ -9,31 +9,35 @@ import AuthRegister from "../auth/AuthRegister";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80",
-    quote: "The future belongs to those who believe in the beauty of their dreams.",
-    author: "Eleanor Roosevelt"
+    image: "/statistics.png",
+    quote: "Introducing AIKO - Your Child's Learning Partner",
+    author: "Winston Churchill",
   },
   {
-    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80",
-    quote: "Your limitation—it's only your imagination.",
-    author: "Anonymous"
+    image: "/ailearning.png",
+    quote: "At A Team Academy, we believe every child is born curious and capable of greatness.",
+    author: "Steve Jobs",
   },
   {
-    image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&q=80",
-    quote: "Dream bigger. Do bigger.",
-    author: "Anonymous"
+    image: "/abacus.png",
+    quote: "Shaping Young Minds with the Power of AI",
+    author: "Steve Jobs",
   },
   {
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
-    quote: "Success doesn't just find you. You have to go out and get it.",
-    author: "Anonymous"
-  }
+    image: "/skill.png",
+    quote: "At A Team Academy, we combine the best of traditional learning like Abacus, Phonics, and Vedic Math with the power of AI",
+    author: "Anonymous",
+  },
 ];
 
 const Register2 = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
+  // Ensure this code only runs on the client
   useEffect(() => {
+    setMounted(true);
+
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
@@ -144,79 +148,74 @@ const Register2 = () => {
               left: 0,
               width: "100%",
               height: "100%",
-              background: "linear-gradient(135deg, rgba(25, 118, 210, 0.85) 0%, rgba(13, 71, 161, 0.85) 100%)",
+              background:
+                "linear-gradient(135deg, rgba(25, 118, 210, 0.85) 0%, rgba(13, 71, 161, 0.85) 100%)",
               zIndex: 1,
             }}
           />
 
           {/* Quote Content */}
-          <Box
-            sx={{
-              position: "relative",
-              zIndex: 2,
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: 6,
-              color: "white",
-            }}
-          >
-            <Box sx={{ maxWidth: "600px", textAlign: "center" }}>
-              <Typography
-                variant="h3"
-                fontWeight="300"
-                mb={3}
-                sx={{
-                  opacity: currentSlide === currentSlide ? 1 : 0,
-                  transition: "opacity 1s ease-in-out 0.3s",
-                  lineHeight: 1.6,
-                  fontStyle: "italic",
-                }}
-              >
-                "{slides[currentSlide].quote}"
-              </Typography>
-              <Typography
-                variant="h6"
-                fontWeight="500"
-                sx={{
-                  opacity: currentSlide === currentSlide ? 1 : 0,
-                  transition: "opacity 1s ease-in-out 0.5s",
-                }}
-              >
-                — {slides[currentSlide].author}
-              </Typography>
+          {mounted && (
+            <Box
+              sx={{
+                position: "relative",
+                zIndex: 2,
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 6,
+                color: "white",
+              }}
+            >
+              <Box sx={{ maxWidth: "600px", textAlign: "center" }}>
+                <Typography
+                  variant="h3"
+                  fontWeight="300"
+                  mb={3}
+                  sx={{
+                    transition: "opacity 1s ease-in-out 0.3s",
+                    lineHeight: 1.6,
+                    fontStyle: "italic",
+                  }}
+                >
+                  &quot;{slides[currentSlide].quote}&quot;
+                </Typography>
 
-              {/* Slide Indicators */}
-              <Stack
-                direction="row"
-                spacing={1}
-                justifyContent="center"
-                mt={6}
-              >
-                {slides.map((_, index) => (
-                  <Box
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    sx={{
-                      width: currentSlide === index ? 40 : 12,
-                      height: 12,
-                      borderRadius: 6,
-                      backgroundColor: currentSlide === index
-                        ? "white"
-                        : "rgba(255, 255, 255, 0.5)",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease",
-                      "&:hover": {
-                        backgroundColor: "white",
-                      },
-                    }}
-                  />
-                ))}
-              </Stack>
+  
+
+                {/* Slide Indicators */}
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  justifyContent="center"
+                  mt={6}
+                >
+                  {slides.map((_, index) => (
+                    <Box
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      sx={{
+                        width: currentSlide === index ? 40 : 12,
+                        height: 12,
+                        borderRadius: 6,
+                        backgroundColor:
+                          currentSlide === index
+                            ? "white"
+                            : "rgba(255, 255, 255, 0.5)",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          backgroundColor: "white",
+                        },
+                      }}
+                    />
+                  ))}
+                </Stack>
+              </Box>
             </Box>
-          </Box>
+          )}
         </Box>
       </Box>
     </PageContainer>
